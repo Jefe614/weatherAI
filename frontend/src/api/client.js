@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const api = axios.create({ baseURL: '/api' })
+const BASE = import.meta.env.VITE_API_BASE || ''
+
+const api = axios.create({ baseURL: `${BASE}/api` })
 
 export const fetchWeather = (lat, lon, days = 7, units = 'metric') =>
   api.get('/weather/', { params: { lat, lon, days, units } })

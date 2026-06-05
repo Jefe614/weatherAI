@@ -10,6 +10,10 @@ DEBUG = os.getenv("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
+RENDER_HOST = os.getenv("RENDER_HOST")
+if RENDER_HOST:
+    ALLOWED_HOSTS.append(RENDER_HOST)
+
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -41,12 +45,16 @@ DATABASES = {}
 STATIC_URL = "/assets/"
 STATICFILES_DIRS = [BASE_DIR.parent / "frontend" / "dist" / "assets"]
 
-# CORS — allow React dev server
+# CORS — allow React dev server & Vercel deployment
 CORS_ALLOW_ALL_ORIGINS = DEBUG
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
+
+VERCEL_ORIGIN = os.getenv("VERCEL_ORIGIN")
+if VERCEL_ORIGIN:
+    CORS_ALLOWED_ORIGINS.append(VERCEL_ORIGIN)
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
