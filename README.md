@@ -13,14 +13,14 @@ A weather dashboard built on the [Weather-AI API](https://weather-ai.co/docs), c
 
 ## Features
 
-| Feature | Screenshot | Details |
-|---|---|---|
-| 🌤 **Weather Dashboard** | — | Current conditions, 7-day forecast, WMO weather codes |
-| 🤖 **AI Summaries** | — | Gemini-powered agronomic insights per location |
-| 🌳 **Forestry Analysis** | — | Upload drone/satellite images → tree count, canopy health, CV overlay |
-| 📱 **Fully Responsive** | — | Works on mobile, tablet, and desktop |
-| 🔐 **Secure Proxy** | — | API key stays server-side; frontend never sees `wai_` credentials |
-| 📍 **Quick Presets** | — | One-click Kenyan locations: Nairobi, Bomet, Kisumu, Mombasa, Nakuru |
+| Feature | Details |
+|---|---|
+| 🌤 **Weather Dashboard** | Current conditions, 7-day forecast, WMO weather codes |
+| 🤖 **AI Summaries** | Gemini-powered agronomic insights per location |
+| 🌳 **Forestry Analysis** | Upload drone/satellite images → tree count, canopy health, CV overlay |
+| 📱 **Fully Responsive** | Works on mobile, tablet, and desktop |
+| 🔐 **Secure Proxy** | API key stays server-side; frontend never sees `wai_` credentials |
+| 📍 **Quick Presets** | One-click Kenyan locations: Nairobi, Bomet, Kisumu, Mombasa, Nakuru |
 
 ---
 
@@ -117,31 +117,6 @@ All routes are prefixed with `/api/` and proxied through Django to keep the API 
 | POST | `/api/trees/analyze/` | Upload image for tree analysis |
 | GET | `/api/trees/history/` | Past analysis history |
 | GET | `/api/trees/quota/` | Remaining analysis quota |
-
----
-
-## Deployment
-
-### Option A — Combined (Render)
-
-| Setting | Value |
-|---|---|
-| **Runtime** | Python |
-| **Build command** | `pip install -r requirements.txt && cd frontend && npm install && npm run build` |
-| **Start command** | `gunicorn core.wsgi:application` |
-| **Env vars** | `WEATHER_AI_KEY`, `DJANGO_SECRET_KEY`, `DEBUG=False` |
-
-### Option B — Split (Backend on Render, Frontend on Netlify)
-
-**Frontend:**
-
-```bash
-cd frontend
-npm run build
-# Deploy frontend/dist/ to Netlify or Vercel
-```
-
-Set `VITE_API_BASE` to your Render backend URL if deploying separately.
 
 ---
 
